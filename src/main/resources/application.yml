@@ -8,17 +8,17 @@ spring:
 eureka:
   instance:
     hostname: localhost
-    # \u8868\u793Aeureka client\u95F4\u9694\u591A\u4E45\u53BB\u62C9\u53D6\u670D\u52A1\u6CE8\u518C\u4FE1\u606F\uFF0C\u9ED8\u8BA4\u4E3A30\u79D2\uFF0C\u5982\u679C\u8981\u8FC5\u901F\u83B7\u53D6\u670D\u52A1\u6CE8\u518C\u72B6\u6001\uFF0C\u53EF\u4EE5\u7F29\u5C0F\u8BE5\u503C
+    # 表示eureka client间隔多久去拉取服务注册信息，默认为30秒，如果要迅速获取服务注册状态，可以缩小该值
     lease-renewal-interval-in-seconds: 5
-    # \u8868\u793Aeureka server\u81F3\u4E0A\u4E00\u6B21\u6536\u5230client\u7684\u5FC3\u8DF3\u4E4B\u540E\uFF0C\u7B49\u5F85\u4E0B\u4E00\u6B21\u5FC3\u8DF3\u7684\u8D85\u65F6\u65F6\u95F4\uFF0C\u5728\u8FD9\u4E2A\u65F6\u95F4\u5185\u82E5\u6CA1\u6536\u5230\u4E0B\u4E00\u6B21\u5FC3\u8DF3\uFF0C\u5219\u5C06\u79FB\u9664\u8BE5instance\u3002
-    # \u9ED8\u8BA4\u4E3A90\u79D2
-    # \u5982\u679C\u8BE5\u503C\u592A\u5927\uFF0C\u5219\u5F88\u53EF\u80FD\u5C06\u6D41\u91CF\u8F6C\u53D1\u8FC7\u53BB\u7684\u65F6\u5019\uFF0C\u8BE5instance\u5DF2\u7ECF\u4E0D\u5B58\u6D3B\u4E86\u3002
-    # \u5982\u679C\u8BE5\u503C\u8BBE\u7F6E\u592A\u5C0F\u4E86\uFF0C\u5219instance\u5219\u5F88\u53EF\u80FD\u56E0\u4E3A\u4E34\u65F6\u7684\u7F51\u7EDC\u6296\u52A8\u800C\u88AB\u6458\u9664\u6389\u3002
-    # \u8BE5\u503C\u81F3\u5C11\u5E94\u8BE5\u5927\u4E8E leaseRenewalIntervalInSeconds
+    # 表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。
+    # 默认为90秒
+    # 如果该值太大，则很可能将流量转发过去的时候，该instance已经不存活了。
+    # 如果该值设置太小了，则instance则很可能因为临时的网络抖动而被摘除掉。
+    # 该值至少应该大于 leaseRenewalIntervalInSeconds
     lease-expiration-duration-in-seconds: 10
   client:
     service-url:
-      defaultZone: http://localhost:8760/eureka/,http://localhost:8761/eureka/,http://localhost:8762/eureka/
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/,http://localhost:8763/eureka/
 
 
 
